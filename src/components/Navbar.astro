@@ -57,14 +57,6 @@ const { darkBackground = false } = Astro.props;
 
 <!-- Mobile Slide-in Menu -->
 <div id="mobile-menu" class="fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-50 md:hidden transform translate-x-full transition-transform duration-300 ease-in-out">
-  <!-- Menu Header -->
-  <div class="flex items-center justify-between p-6 border-b border-gray-200">
-    <div>
-      <h2 class="text-xl font-bold text-primary">Menu</h2>
-      <p class="text-xs text-gray-500 uppercase tracking-wider">Navigation</p>
-    </div>
-  </div>
-
   <!-- Menu Links -->
   <div class="py-6 px-6 space-y-1">
     <a href="/" class:list={["block px-4 py-4 font-medium text-lg rounded-lg transition-all duration-200", isActive('/') ? 'bg-accent text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-accent']}>
