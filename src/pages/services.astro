@@ -1,0 +1,294 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import ImageSlider from '../components/ImageSlider';
+import FadeIn from '../components/FadeIn';
+
+// Service images
+const serviceImages = {
+  leadership: [
+    'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=800&fit=crop',
+    'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=800&fit=crop',
+    'https://images.unsplash.com/photo-1531545514256-b1400bc00f31?w=1200&h=800&fit=crop'
+  ],
+  staffDev: [
+    'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&h=800&fit=crop',
+    'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&h=800&fit=crop',
+    'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1200&h=800&fit=crop'
+  ],
+  communication: [
+    'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1200&h=800&fit=crop',
+    'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=1200&h=800&fit=crop',
+    'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=1200&h=800&fit=crop'
+  ],
+  sales: [
+    'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&h=800&fit=crop',
+    'https://images.unsplash.com/photo-1553484771-371a605b060b?w=1200&h=800&fit=crop',
+    'https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?w=1200&h=800&fit=crop'
+  ],
+  productivity: [
+    'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1200&h=800&fit=crop',
+    'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=800&fit=crop',
+    'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=1200&h=800&fit=crop'
+  ],
+  dei: [
+    'https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=1200&h=800&fit=crop',
+    'https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?w=1200&h=800&fit=crop',
+    'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1200&h=800&fit=crop'
+  ]
+};
+
+const services = [
+  {
+    title: "Leadership Development",
+    description: "Transform your managers into inspiring leaders who drive results and build high-performing teams.",
+    images: serviceImages.leadership,
+    features: [
+      "Executive Leadership Programs",
+      "Strategic Thinking & Decision Making",
+      "Change Management & Innovation",
+      "Team Building & Motivation",
+      "Emotional Intelligence for Leaders",
+      "Conflict Resolution & Difficult Conversations"
+    ],
+    outcomes: "95% of participants report improved leadership confidence within 3 months"
+  },
+  {
+    title: "Staff Development Programs",
+    description: "Unlock your team's full potential with comprehensive development programs that boost skills, engagement, and retention.",
+    images: serviceImages.staffDev,
+    features: [
+      "Skills Gap Analysis & Planning",
+      "Career Development Pathways",
+      "Performance Improvement Programs",
+      "Mentoring & Coaching Systems",
+      "Employee Engagement Strategies",
+      "Talent Retention Solutions"
+    ],
+    outcomes: "Organizations see 40% improvement in employee retention after our programs"
+  },
+  {
+    title: "Communication Excellence",
+    description: "Build a culture of clear, effective communication that reduces conflicts and drives collaboration across all levels.",
+    images: serviceImages.communication,
+    features: [
+      "Professional Presentation Skills",
+      "Active Listening Techniques",
+      "Written Communication Mastery",
+      "Cross-Cultural Communication",
+      "Meeting Facilitation Skills",
+      "Feedback & Performance Conversations"
+    ],
+    outcomes: "Teams report 60% reduction in miscommunication-related issues"
+  },
+  {
+    title: "Sales & Customer Service Training",
+    description: "Equip your team with proven techniques to increase sales, build customer loyalty, and deliver exceptional service.",
+    images: serviceImages.sales,
+    features: [
+      "Consultative Selling Techniques",
+      "Customer Journey Mapping",
+      "Objection Handling Mastery",
+      "Service Excellence Standards",
+      "Relationship Building Skills",
+      "Complaint Resolution Strategies"
+    ],
+    outcomes: "Average 25% increase in sales performance post-training"
+  },
+  {
+    title: "Time & Productivity Management",
+    description: "Help your team work smarter, not harder, with proven strategies to maximize efficiency and reduce burnout.",
+    images: serviceImages.productivity,
+    features: [
+      "Priority Management Systems",
+      "Delegation & Task Management",
+      "Meeting Optimization",
+      "Email & Digital Productivity",
+      "Work-Life Balance Strategies",
+      "Focus & Concentration Techniques"
+    ],
+    outcomes: "Participants gain average of 8 hours productive time per week"
+  },
+  {
+    title: "Diversity, Equity & Inclusion",
+    description: "Create a truly inclusive workplace where every team member feels valued, respected, and empowered to contribute.",
+    images: serviceImages.dei,
+    features: [
+      "Unconscious Bias Training",
+      "Inclusive Leadership Practices",
+      "Cultural Competency Development",
+      "Accessible Communication",
+      "Psychological Safety Building",
+      "Inclusive Recruitment Practices"
+    ],
+    outcomes: "Organizations report 70% improvement in employee inclusion scores"
+  }
+];
+---
+
+<Layout
+  title="Our Services - My Way Training"
+  description="Comprehensive corporate training solutions including leadership development, staff training, communication skills, and more. Tailored programs that deliver measurable results."
+>
+  <Navbar />
+
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-20 bg-gradient-to-br from-primary via-secondary to-primary">
+    <div class="container-custom">
+      <FadeIn client:load direction="down">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">
+            Transform Your Team with Expert Training
+          </h1>
+          <p class="text-xl md:text-2xl text-gray-200 leading-relaxed">
+            Discover our comprehensive range of training solutions designed to address your specific business challenges and drive measurable results.
+          </p>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="py-20 bg-white">
+    <div class="container-custom">
+      <div class="space-y-20">
+        {services.map((service, index) => (
+          <FadeIn client:load direction="up" delay={index * 100}>
+            <div class="card group hover:shadow-2xl transition-shadow duration-300">
+              <div class="grid md:grid-cols-2 gap-8 items-center">
+                {/* Image Slider Column */}
+                <div class={index % 2 === 0 ? 'md:order-1' : 'md:order-2'}>
+                  <ImageSlider
+                    client:load
+                    images={service.images}
+                    className="rounded-lg overflow-hidden"
+                  />
+                </div>
+
+                {/* Content Column */}
+                <div class={index % 2 === 0 ? 'md:order-2' : 'md:order-1'}>
+                  <h2 class="text-3xl font-bold text-primary mb-4 group-hover:text-accent transition-colors duration-300">
+                    {service.title}
+                  </h2>
+                  <p class="text-gray-600 leading-relaxed mb-6">
+                    {service.description}
+                  </p>
+
+                  <h3 class="text-xl font-semibold text-primary mb-4">What You'll Learn</h3>
+                  <div class="grid gap-3 mb-6">
+                    {service.features.map((feature) => (
+                      <div class="flex items-start space-x-3">
+                        <span class="text-accent font-bold text-lg">✓</span>
+                        <span class="text-gray-700">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div class="bg-accent/5 border-l-4 border-accent p-4 rounded">
+                    <p class="text-sm font-medium text-gray-700">
+                      <span class="text-accent font-semibold">Impact:</span> {service.outcomes}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="container-custom">
+      <FadeIn client:load direction="up" className="text-center mb-16">
+        <h2 class="section-heading text-primary mb-4">Our Training Process</h2>
+        <p class="section-subheading max-w-3xl mx-auto">
+          A proven, systematic approach that ensures maximum impact and lasting results.
+        </p>
+      </FadeIn>
+
+      <div class="grid md:grid-cols-4 gap-8">
+        <FadeIn client:load direction="up" delay={100}>
+          <div class="text-center card">
+            <div class="mb-6 overflow-hidden rounded-lg">
+              <img
+                src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&h=600&fit=crop"
+                alt="Discovery Phase"
+                class="w-full h-48 object-cover"
+              />
+            </div>
+            <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">1</div>
+            <h3 class="text-xl font-semibold text-primary mb-3">Discovery</h3>
+            <p class="text-gray-600">We analyze your needs, challenges, and objectives through comprehensive consultation.</p>
+          </div>
+        </FadeIn>
+
+        <FadeIn client:load direction="up" delay={200}>
+          <div class="text-center card">
+            <div class="mb-6 overflow-hidden rounded-lg">
+              <img
+                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop"
+                alt="Design Phase"
+                class="w-full h-48 object-cover"
+              />
+            </div>
+            <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">2</div>
+            <h3 class="text-xl font-semibold text-primary mb-3">Design</h3>
+            <p class="text-gray-600">Custom-tailored programs designed specifically for your team and industry context.</p>
+          </div>
+        </FadeIn>
+
+        <FadeIn client:load direction="up" delay={300}>
+          <div class="text-center card">
+            <div class="mb-6 overflow-hidden rounded-lg">
+              <img
+                src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop"
+                alt="Delivery Phase"
+                class="w-full h-48 object-cover"
+              />
+            </div>
+            <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">3</div>
+            <h3 class="text-xl font-semibold text-primary mb-3">Delivery</h3>
+            <p class="text-gray-600">Engaging, interactive sessions delivered by experienced trainers using proven methodologies.</p>
+          </div>
+        </FadeIn>
+
+        <FadeIn client:load direction="up" delay={400}>
+          <div class="text-center card">
+            <div class="mb-6 overflow-hidden rounded-lg">
+              <img
+                src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop"
+                alt="Development Phase"
+                class="w-full h-48 object-cover"
+              />
+            </div>
+            <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">4</div>
+            <h3 class="text-xl font-semibold text-primary mb-3">Development</h3>
+            <p class="text-gray-600">Ongoing support and follow-up to ensure sustained behavioral change and measurable results.</p>
+          </div>
+        </FadeIn>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="bg-gradient-to-r from-primary via-secondary to-primary py-20">
+    <div class="container-custom">
+      <FadeIn client:load direction="up">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Ready to Get Started?</h2>
+          <p class="text-xl text-gray-200 mb-10 leading-relaxed">
+            Book a free consultation to discuss your training needs and discover how we can help your team excel.
+          </p>
+          <a href="/contact" class="bg-accent text-white px-8 py-4 rounded-md font-medium uppercase text-sm hover:bg-buttonHover transition-colors duration-300 inline-flex items-center space-x-2">
+            <span>Book Free Consultation</span>
+          </a>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

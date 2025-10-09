@@ -1,16 +1,332 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import ImageSlider from '../components/ImageSlider';
+import AnimatedCounter from '../components/AnimatedCounter';
+import FadeIn from '../components/FadeIn';
 
+// Hero slider images
+const heroImages = [
+	'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&h=900&fit=crop',
+	'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1600&h=900&fit=crop',
+	'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1600&h=900&fit=crop'
+];
+
+// Services images
+const servicesImages = {
+	leadership: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&h=600&fit=crop',
+	staffDev: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=600&fit=crop',
+	communication: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=600&fit=crop'
+};
+
+// Testimonial slider images
+const testimonialImages = [
+	'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=600&fit=crop',
+	'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&h=600&fit=crop',
+	'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=800&h=600&fit=crop'
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="My Way Training - Professional Corporate Training & Staff Development">
+	<Navbar />
+
+	<Hero
+		title="Transform Your Team, Transform Your Business"
+		subtitle="Partner with the UK's leading corporate training provider for tailored programs that deliver measurable results and lasting impact."
+		primaryCTA="Book Free Consultation"
+		primaryCTALink="/contact"
+		secondaryCTA="Explore Services"
+		secondaryCTALink="/services"
+	/>
+
+	<!-- Services Preview Section -->
+	<section class="py-20 bg-white">
+		<div class="container-custom">
+			<FadeIn client:load direction="up" className="text-center mb-16">
+				<h2 class="section-heading text-primary">Our Core Services</h2>
+				<p class="section-subheading max-w-3xl mx-auto">
+					Comprehensive training solutions designed to elevate your team's performance and drive sustainable business growth.
+				</p>
+			</FadeIn>
+
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+				<!-- Leadership Training -->
+				<FadeIn client:load direction="up" delay={100}>
+					<div class="card group cursor-pointer h-full">
+						<div class="mb-6 overflow-hidden rounded-lg">
+							<img
+								src={servicesImages.leadership}
+								alt="Leadership Training"
+								class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+							/>
+						</div>
+						<h3 class="text-2xl font-semibold mb-4 text-primary group-hover:text-accent transition-colors duration-300">
+							Leadership Training
+						</h3>
+						<p class="text-gray-600 mb-6 leading-relaxed">
+							Develop confident, capable leaders who inspire teams and drive organizational success through our comprehensive leadership programs.
+						</p>
+						<ul class="space-y-2">
+							<li class="flex items-start space-x-2">
+								<span class="text-accent mt-1">•</span>
+								<span class="text-gray-700">Executive coaching</span>
+							</li>
+							<li class="flex items-start space-x-2">
+								<span class="text-accent mt-1">•</span>
+								<span class="text-gray-700">Strategic thinking</span>
+							</li>
+							<li class="flex items-start space-x-2">
+								<span class="text-accent mt-1">•</span>
+								<span class="text-gray-700">Decision-making skills</span>
+							</li>
+							<li class="flex items-start space-x-2">
+								<span class="text-accent mt-1">•</span>
+								<span class="text-gray-700">Change management</span>
+							</li>
+						</ul>
+						<div class="mt-6 flex items-center text-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+							<span class="text-sm font-medium">Learn more</span>
+						</div>
+					</div>
+				</FadeIn>
+
+				<!-- Staff Development -->
+				<FadeIn client:load direction="up" delay={200}>
+					<div class="card group cursor-pointer h-full">
+						<div class="mb-6 overflow-hidden rounded-lg">
+							<img
+								src={servicesImages.staffDev}
+								alt="Staff Development"
+								class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+							/>
+						</div>
+						<h3 class="text-2xl font-semibold mb-4 text-primary group-hover:text-accent transition-colors duration-300">
+							Staff Development
+						</h3>
+						<p class="text-gray-600 mb-6 leading-relaxed">
+							Unlock your team's potential with tailored development programs that enhance skills, boost morale, and increase productivity.
+						</p>
+						<ul class="space-y-2">
+							<li class="flex items-start space-x-2">
+								<span class="text-accent mt-1">•</span>
+								<span class="text-gray-700">Skills assessment</span>
+							</li>
+							<li class="flex items-start space-x-2">
+								<span class="text-accent mt-1">•</span>
+								<span class="text-gray-700">Career progression planning</span>
+							</li>
+							<li class="flex items-start space-x-2">
+								<span class="text-accent mt-1">•</span>
+								<span class="text-gray-700">Performance improvement</span>
+							</li>
+							<li class="flex items-start space-x-2">
+								<span class="text-accent mt-1">•</span>
+								<span class="text-gray-700">Talent retention strategies</span>
+							</li>
+						</ul>
+						<div class="mt-6 flex items-center text-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+							<span class="text-sm font-medium">Learn more</span>
+						</div>
+					</div>
+				</FadeIn>
+
+				<!-- Communication Skills -->
+				<FadeIn client:load direction="up" delay={300}>
+					<div class="card group cursor-pointer h-full">
+						<div class="mb-6 overflow-hidden rounded-lg">
+							<img
+								src={servicesImages.communication}
+								alt="Communication Skills"
+								class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+							/>
+						</div>
+						<h3 class="text-2xl font-semibold mb-4 text-primary group-hover:text-accent transition-colors duration-300">
+							Communication Skills
+						</h3>
+						<p class="text-gray-600 mb-6 leading-relaxed">
+							Build stronger teams through effective communication training that improves collaboration, reduces conflicts, and drives results.
+						</p>
+						<ul class="space-y-2">
+							<li class="flex items-start space-x-2">
+								<span class="text-accent mt-1">•</span>
+								<span class="text-gray-700">Presentation skills</span>
+							</li>
+							<li class="flex items-start space-x-2">
+								<span class="text-accent mt-1">•</span>
+								<span class="text-gray-700">Active listening</span>
+							</li>
+							<li class="flex items-start space-x-2">
+								<span class="text-accent mt-1">•</span>
+								<span class="text-gray-700">Conflict resolution</span>
+							</li>
+							<li class="flex items-start space-x-2">
+								<span class="text-accent mt-1">•</span>
+								<span class="text-gray-700">Cross-team collaboration</span>
+							</li>
+						</ul>
+						<div class="mt-6 flex items-center text-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+							<span class="text-sm font-medium">Learn more</span>
+						</div>
+					</div>
+				</FadeIn>
+			</div>
+		</div>
+	</section>
+
+	<!-- Why Choose Us Section -->
+	<section class="py-20 bg-gray-50">
+		<div class="container-custom">
+			<FadeIn client:load direction="up" className="text-center mb-16">
+				<h2 class="section-heading text-primary">Why Choose My Way Training?</h2>
+				<p class="section-subheading max-w-3xl mx-auto">
+					We're more than just trainers – we're your partners in building a high-performing, future-ready team.
+				</p>
+			</FadeIn>
+
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+				<FadeIn client:load direction="up" delay={100}>
+					<div class="text-center card">
+						<div class="mb-6 overflow-hidden rounded-lg">
+							<img
+								src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop"
+								alt="Expert Trainers"
+								class="w-full h-48 object-cover"
+							/>
+						</div>
+						<h3 class="text-2xl font-semibold mb-4 text-primary">Expert Trainers</h3>
+						<p class="text-gray-600 leading-relaxed">15+ years of experience delivering transformational training across diverse industries.</p>
+					</div>
+				</FadeIn>
+
+				<FadeIn client:load direction="up" delay={200}>
+					<div class="text-center card">
+						<div class="mb-6 overflow-hidden rounded-lg">
+							<img
+								src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop"
+								alt="Proven Results"
+								class="w-full h-48 object-cover"
+							/>
+						</div>
+						<h3 class="text-2xl font-semibold mb-4 text-primary">Proven Results</h3>
+						<p class="text-gray-600 leading-relaxed">95% client satisfaction rate with measurable improvements in team performance.</p>
+					</div>
+				</FadeIn>
+
+				<FadeIn client:load direction="up" delay={300}>
+					<div class="text-center card">
+						<div class="mb-6 overflow-hidden rounded-lg">
+							<img
+								src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop"
+								alt="Tailored Solutions"
+								class="w-full h-48 object-cover"
+							/>
+						</div>
+						<h3 class="text-2xl font-semibold mb-4 text-primary">Tailored Solutions</h3>
+						<p class="text-gray-600 leading-relaxed">Custom programs designed to address your specific challenges and business objectives.</p>
+					</div>
+				</FadeIn>
+			</div>
+
+			<!-- Stats Section with Animated Counters -->
+			<FadeIn client:load direction="up" className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-16 border-t border-gray-200">
+				<div class="text-center">
+					<AnimatedCounter client:load end={500} suffix="+" className="text-5xl font-bold text-accent mb-2" />
+					<div class="text-gray-600 font-medium">Companies Trained</div>
+				</div>
+				<div class="text-center">
+					<AnimatedCounter client:load end={10000} suffix="+" className="text-5xl font-bold text-accent mb-2" />
+					<div class="text-gray-600 font-medium">Professionals Developed</div>
+				</div>
+				<div class="text-center">
+					<AnimatedCounter client:load end={95} suffix="%" className="text-5xl font-bold text-accent mb-2" />
+					<div class="text-gray-600 font-medium">Satisfaction Rate</div>
+				</div>
+				<div class="text-center">
+					<AnimatedCounter client:load end={15} suffix="+" className="text-5xl font-bold text-accent mb-2" />
+					<div class="text-gray-600 font-medium">Years Experience</div>
+				</div>
+			</FadeIn>
+		</div>
+	</section>
+
+	<!-- Testimonials Slider Section -->
+	<section class="py-20 bg-white">
+		<div class="container-custom">
+			<FadeIn client:load direction="up" className="text-center mb-16">
+				<h2 class="section-heading text-primary">What Our Clients Say</h2>
+				<p class="section-subheading max-w-3xl mx-auto">
+					Hear from organizations that have transformed their teams with our training programs.
+				</p>
+			</FadeIn>
+
+			<FadeIn client:load direction="up" className="max-w-5xl mx-auto">
+				<ImageSlider client:load images={testimonialImages} className="shadow-2xl" />
+				<div class="mt-12 grid md:grid-cols-3 gap-8">
+					<div class="card">
+						<p class="text-gray-700 italic mb-4">"My Way Training completely transformed our leadership team. The results were immediate and lasting."</p>
+						<div class="flex items-center space-x-3">
+							<div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white font-bold">
+								JD
+							</div>
+							<div>
+								<p class="font-semibold text-primary">Jane Doe</p>
+								<p class="text-sm text-gray-600">CEO, Tech Solutions Ltd</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<p class="text-gray-700 italic mb-4">"Outstanding training that delivered measurable improvements in team productivity and morale."</p>
+						<div class="flex items-center space-x-3">
+							<div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white font-bold">
+								MS
+							</div>
+							<div>
+								<p class="font-semibold text-primary">Mark Smith</p>
+								<p class="text-sm text-gray-600">HR Director, Global Finance</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<p class="text-gray-700 italic mb-4">"The best investment we've made in our people. Highly recommend My Way Training!"</p>
+						<div class="flex items-center space-x-3">
+							<div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white font-bold">
+								SP
+							</div>
+							<div>
+								<p class="font-semibold text-primary">Sarah Parker</p>
+								<p class="text-sm text-gray-600">Operations Manager, Retail Co</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</FadeIn>
+		</div>
+	</section>
+
+	<!-- CTA Section -->
+	<section class="bg-gradient-to-r from-primary via-secondary to-primary py-20">
+		<div class="container-custom">
+			<FadeIn client:load direction="up" className="max-w-4xl mx-auto text-center">
+				<h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Ready to Elevate Your Team?</h2>
+				<p class="text-xl text-gray-200 mb-10 leading-relaxed">
+					Book a free consultation today and discover how our tailored training programs can transform your business.
+				</p>
+				<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+					<a href="/contact" class="bg-accent text-white px-8 py-4 rounded-md font-medium uppercase text-sm hover:bg-buttonHover transition-colors duration-300 inline-flex items-center space-x-2">
+						<span>Book Free Consultation</span>
+					</a>
+					<a href="tel:+442012345678" class="border-2 border-white text-white px-8 py-4 rounded-md font-medium uppercase text-sm hover:bg-white hover:text-primary transition-all duration-300 inline-flex items-center space-x-2">
+						<span>Call Us Now</span>
+					</a>
+				</div>
+				<p class="text-gray-300 text-sm mt-8">No obligation • Free 30-minute consultation • Tailored solutions</p>
+			</FadeIn>
+		</div>
+	</section>
+
+	<Footer />
+</Layout>

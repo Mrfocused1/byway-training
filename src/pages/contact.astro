@@ -1,0 +1,234 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import ContactForm from '../components/ContactForm';
+import ImageSlider from '../components/ImageSlider';
+import FadeIn from '../components/FadeIn';
+
+const heroImages = [
+	'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600&h=900&fit=crop',
+	'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1600&h=900&fit=crop',
+	'https://images.unsplash.com/photo-1552581234-26160f608093?w=1600&h=900&fit=crop'
+];
+
+const contactMethods = [
+  {
+    image: "https://images.unsplash.com/photo-1534536281715-e28d76689b4d?w=800&h=600&fit=crop",
+    title: "Phone",
+    detail: "+44 20 1234 5678",
+    subtitle: "Mon-Fri from 9am to 6pm"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop",
+    title: "Email",
+    detail: "hello@mywaytraining.co.uk",
+    subtitle: "We'll respond within 24 hours"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=800&h=600&fit=crop",
+    title: "Office",
+    detail: "123 Business Park, London EC1A 1BB",
+    subtitle: "By appointment only"
+  }
+];
+
+const faqs = [
+  {
+    question: "How long does a typical training program last?",
+    answer: "Training programs are customized to your needs. They can range from half-day workshops to multi-month development programs. We'll work with you to design the right duration and format."
+  },
+  {
+    question: "Do you offer online training?",
+    answer: "Yes! We offer flexible delivery options including in-person, virtual, and hybrid training to suit your team's needs and preferences."
+  },
+  {
+    question: "How much does training cost?",
+    answer: "Pricing varies based on program type, duration, number of participants, and customization required. Contact us for a tailored quote based on your specific needs."
+  },
+  {
+    question: "What industries do you work with?",
+    answer: "We've worked with organizations across diverse industries including finance, healthcare, technology, retail, manufacturing, and professional services. Our programs are tailored to your sector's specific challenges."
+  }
+];
+---
+
+<Layout
+  title="Contact Us - My Way Training"
+  description="Get in touch with My Way Training to discuss your corporate training needs. Book a free consultation or request a quote for tailored training programs."
+>
+  <Navbar />
+
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-20 bg-gradient-to-br from-primary via-secondary to-primary">
+    <div class="container-custom">
+      <FadeIn client:load direction="down">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">
+            Let's Transform Your Team Together
+          </h1>
+          <p class="text-xl md:text-2xl text-gray-200 leading-relaxed">
+            Ready to invest in your team's development? Get in touch for a free consultation and discover how our training programs can drive real results.
+          </p>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+
+  <!-- Hero Image Slider -->
+  <section class="py-0 bg-white -mt-10">
+    <div class="container-custom">
+      <FadeIn client:load direction="up" className="w-full">
+        <ImageSlider client:load images={heroImages} className="shadow-2xl" />
+      </FadeIn>
+    </div>
+  </section>
+
+  <!-- Contact Methods Section -->
+  <section class="py-20 bg-white mt-10">
+    <div class="container-custom">
+      <FadeIn client:load direction="up" className="text-center mb-16">
+        <h2 class="section-heading text-primary mb-4">Get In Touch</h2>
+        <p class="section-subheading max-w-3xl mx-auto">
+          Choose the method that works best for you. We're here to help.
+        </p>
+      </FadeIn>
+
+      <div class="grid md:grid-cols-3 gap-8 mb-16">
+        {contactMethods.map((method, index) => (
+          <FadeIn client:load direction="up" delay={index * 100}>
+            <div class="card text-center group">
+              <div class="mb-6 overflow-hidden rounded-lg">
+                <img
+                  src={method.image}
+                  alt={method.title}
+                  class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+              </div>
+              <h3 class="text-xl font-semibold text-primary mb-2 group-hover:text-accent transition-colors duration-300">{method.title}</h3>
+              <p class="text-lg text-accent font-medium mb-1">{method.detail}</p>
+              <p class="text-sm text-gray-600">{method.subtitle}</p>
+            </div>
+          </FadeIn>
+        ))}
+      </div>
+
+      <!-- Contact Form -->
+      <div class="mt-16">
+        <FadeIn client:load direction="up">
+          <div class="text-center mb-12">
+            <h2 class="section-heading text-primary mb-4">Request a Free Consultation</h2>
+            <p class="section-subheading max-w-3xl mx-auto">
+              Fill out the form below and we'll get back to you within 24 hours to discuss your training needs.
+            </p>
+          </div>
+          <ContactForm client:load />
+        </FadeIn>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="container-custom">
+      <FadeIn client:load direction="up" className="text-center mb-16">
+        <h2 class="section-heading text-primary mb-4">Frequently Asked Questions</h2>
+        <p class="section-subheading max-w-3xl mx-auto">
+          Quick answers to common questions about our training programs.
+        </p>
+      </FadeIn>
+
+      <div class="max-w-4xl mx-auto space-y-6">
+        {faqs.map((faq, index) => (
+          <FadeIn client:load direction="up" delay={index * 100}>
+            <div class="card group hover:shadow-xl transition-shadow duration-300">
+              <h3 class="text-xl font-semibold text-primary mb-3 group-hover:text-accent transition-colors duration-300">
+                {faq.question}
+              </h3>
+              <p class="text-gray-700 leading-relaxed">
+                {faq.answer}
+              </p>
+            </div>
+          </FadeIn>
+        ))}
+      </div>
+
+      <FadeIn client:load direction="up" delay={500}>
+        <div class="text-center mt-12">
+          <p class="text-gray-600 text-lg">
+            Have more questions?{' '}
+            <a href="mailto:hello@mywaytraining.co.uk" class="text-accent font-medium hover:underline">
+              Send us an email
+            </a>
+            {' '}or give us a call at{' '}
+            <a href="tel:+442012345678" class="text-accent font-medium hover:underline">
+              +44 20 1234 5678
+            </a>
+          </p>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+
+  <!-- Office Location Section -->
+  <section class="py-20 bg-white">
+    <div class="container-custom">
+      <FadeIn client:load direction="up" className="text-center mb-12">
+        <h2 class="section-heading text-primary mb-4">Visit Our Office</h2>
+        <p class="section-subheading max-w-3xl mx-auto">
+          Located in the heart of London. Appointments available Monday to Friday.
+        </p>
+      </FadeIn>
+
+      <FadeIn client:load direction="up" delay={200}>
+        <div class="max-w-5xl mx-auto">
+          <img
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&h=800&fit=crop"
+            alt="London Office Building"
+            class="w-full rounded-lg shadow-2xl"
+          />
+          <div class="mt-8 text-center card">
+            <h3 class="text-2xl font-semibold text-primary mb-4">My Way Training Headquarters</h3>
+            <p class="text-lg text-gray-700 mb-2">123 Business Park</p>
+            <p class="text-lg text-gray-700 mb-4">London EC1A 1BB</p>
+            <p class="text-gray-600 mb-6">
+              Our modern training facilities are equipped with state-of-the-art technology and comfortable learning spaces designed to maximize engagement and knowledge retention.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="tel:+442012345678" class="btn-primary">
+                Call to Schedule Visit
+              </a>
+              <a href="/contact#form" class="btn-secondary">
+                Request Appointment
+              </a>
+            </div>
+          </div>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="bg-gradient-to-r from-primary via-secondary to-primary py-20">
+    <div class="container-custom">
+      <FadeIn client:load direction="up">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Ready to Get Started?</h2>
+          <p class="text-xl text-gray-200 mb-10 leading-relaxed">
+            Book your free 30-minute consultation today and discover how we can help transform your team.
+          </p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="tel:+442012345678" class="bg-accent text-white px-8 py-4 rounded-md font-medium uppercase text-sm hover:bg-buttonHover transition-colors duration-300">
+              Call Us Now
+            </a>
+            <a href="mailto:hello@mywaytraining.co.uk" class="border-2 border-white text-white px-8 py-4 rounded-md font-medium uppercase text-sm hover:bg-white hover:text-primary transition-all duration-300">
+              Email Us
+            </a>
+          </div>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

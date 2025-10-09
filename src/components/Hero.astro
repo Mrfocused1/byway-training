@@ -1,0 +1,100 @@
+---
+import InfiniteSlider from './InfiniteSlider';
+
+interface Props {
+  title: string;
+  subtitle: string;
+  primaryCTA?: string;
+  primaryCTALink?: string;
+  secondaryCTA?: string;
+  secondaryCTALink?: string;
+}
+
+const {
+  title,
+  subtitle,
+  primaryCTA = "Get Started",
+  primaryCTALink = "/contact",
+  secondaryCTA = "Learn More",
+  secondaryCTALink = "/services"
+} = Astro.props;
+
+// Company logos - using placeholder company images
+const companyLogos = [
+  { name: "Microsoft", logo: "https://logo.clearbit.com/microsoft.com" },
+  { name: "Google", logo: "https://logo.clearbit.com/google.com" },
+  { name: "Amazon", logo: "https://logo.clearbit.com/amazon.com" },
+  { name: "Apple", logo: "https://logo.clearbit.com/apple.com" },
+  { name: "IBM", logo: "https://logo.clearbit.com/ibm.com" },
+  { name: "Oracle", logo: "https://logo.clearbit.com/oracle.com" },
+  { name: "SAP", logo: "https://logo.clearbit.com/sap.com" },
+  { name: "Adobe", logo: "https://logo.clearbit.com/adobe.com" },
+  { name: "Salesforce", logo: "https://logo.clearbit.com/salesforce.com" },
+  { name: "Intel", logo: "https://logo.clearbit.com/intel.com" },
+];
+---
+
+<section class="relative min-h-screen flex flex-col justify-between overflow-hidden bg-gradient-to-br from-primary via-secondary to-primary">
+  <!-- Animated Background Elements -->
+  <div class="absolute inset-0 overflow-hidden opacity-10">
+    <div class="absolute top-20 left-10 w-72 h-72 bg-accent rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 bg-accent rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+  </div>
+
+  <div class="flex-1 flex items-center">
+    <div class="container-custom relative z-10 py-32 w-full">
+      <div class="max-w-4xl mx-auto text-center">
+        <!-- Main Title -->
+        <h1 class="hero-title text-white mb-6 slide-down">
+          {title}
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed slide-down stagger-1">
+          {subtitle}
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 slide-down stagger-2">
+          <a href={primaryCTALink} class="btn-primary px-8 py-4 text-base inline-flex items-center space-x-2">
+            <span>{primaryCTA}</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+            </svg>
+          </a>
+          <a href={secondaryCTALink} class="btn-secondary px-8 py-4 text-base bg-transparent">
+            {secondaryCTA}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trusted By Section with Logo Slider -->
+  <div class="relative z-10 pb-20">
+    <div class="text-center mb-8">
+      <h3 class="text-white/80 text-sm md:text-base font-semibold uppercase tracking-wider">
+        Trusted By
+      </h3>
+    </div>
+    <InfiniteSlider client:load duration={25} gap={48} className="w-full">
+      {companyLogos.map((company) => (
+        <div class="flex items-center justify-center px-8 py-4 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300" style="min-width: 160px; height: 80px;">
+          <img
+            src={company.logo}
+            alt={`${company.name} logo`}
+            class="max-h-12 max-w-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </InfiniteSlider>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
+    <div class="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
+      <div class="w-1.5 h-3 bg-white rounded-full mt-2"></div>
+    </div>
+  </div>
+</section>

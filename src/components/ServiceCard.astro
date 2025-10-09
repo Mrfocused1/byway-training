@@ -1,0 +1,51 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  features?: string[];
+  iconPath: string;
+}
+
+const { title, description, features = [], iconPath } = Astro.props;
+---
+
+<div class="card group cursor-pointer h-full">
+  <!-- Icon -->
+  <div class="mb-6 inline-block">
+    <div class="w-16 h-16 bg-accent/10 rounded-lg flex items-center justify-center group-hover:bg-accent transition-colors duration-300">
+      <svg class="w-8 h-8 text-accent group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={iconPath}></path>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Title -->
+  <h3 class="text-2xl font-semibold mb-4 text-primary group-hover:text-accent transition-colors duration-300">
+    {title}
+  </h3>
+
+  <!-- Description -->
+  <p class="text-gray-600 mb-6 leading-relaxed">
+    {description}
+  </p>
+
+  <!-- Features -->
+  {features.length > 0 && (
+    <ul class="space-y-2">
+      {features.map((feature) => (
+        <li class="flex items-start space-x-2">
+          <span class="text-accent mt-1">•</span>
+          <span class="text-gray-700">{feature}</span>
+        </li>
+      ))}
+    </ul>
+  )}
+
+  <!-- Hover Indicator -->
+  <div class="mt-6 flex items-center text-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+    <span class="text-sm font-medium">Learn more</span>
+    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+    </svg>
+  </div>
+</div>
