@@ -65,11 +65,11 @@ const companyLogos = [
         />
         <!-- Enhanced Left gradient: 60% width, 80% opacity -->
         <div class="absolute top-0 left-0 bottom-0 bg-gradient-to-r from-black/80 to-transparent" style="width: 60%;"></div>
-        <!-- Enhanced Bottom gradient: 85% height, pure black at bottom -->
-        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/90 to-transparent" style="height: 85%;"></div>
+        <!-- Bottom gradient: 60% height, adjusted strength -->
+        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/90 to-transparent" style="height: 60%;"></div>
       </div>
 
-      <!-- Content: Title, Description AND Buttons - unified container -->
+      <!-- Content: Title and Description -->
       <div class="relative z-10 flex flex-col items-start justify-center text-left px-6 w-full">
         <!-- Title -->
         <h1 class="text-4xl font-bold tracking-tight text-white leading-tight mb-6">
@@ -78,25 +78,9 @@ const companyLogos = [
         </h1>
 
         <!-- Description -->
-        <p class="max-w-2xl text-lg leading-8 text-white/90 mb-8">
+        <p class="max-w-2xl text-lg leading-8 text-white/90">
           {subtitle}
         </p>
-
-        <!-- CTA Buttons - now integrated into hero -->
-        <div class="flex flex-row items-center gap-3 w-full">
-          <a
-            href={primaryCTALink}
-            class="flex-1 px-6 py-3 min-h-[42px] bg-accent text-white font-semibold uppercase text-sm tracking-wide rounded-md transition-all duration-300 hover:bg-buttonHover hover:shadow-xl inline-flex items-center justify-center shadow-lg"
-          >
-            Book
-          </a>
-          <a
-            href={secondaryCTALink}
-            class="flex-1 px-6 py-3 min-h-[42px] bg-white/95 backdrop-blur-sm border-2 border-white text-primary font-semibold uppercase text-sm tracking-wide rounded-md transition-all duration-300 hover:bg-white hover:shadow-xl inline-flex items-center justify-center shadow-lg"
-          >
-            Explore
-          </a>
-        </div>
       </div>
     </div>
   </div>
