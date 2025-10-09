@@ -1,5 +1,6 @@
 ---
 import InfiniteSlider from './InfiniteSlider';
+import { FlipWords } from './FlipWords';
 
 interface Props {
   title: string;
@@ -19,6 +20,9 @@ const {
   secondaryCTALink = "/services"
 } = Astro.props;
 
+// Words to flip through
+const flipWords = ["Your Team", "Your Business", "Your Future", "Your Success"];
+
 // Company logos - using placeholder company images
 const companyLogos = [
   { name: "Microsoft", logo: "https://logo.clearbit.com/microsoft.com" },
@@ -34,35 +38,45 @@ const companyLogos = [
 ];
 ---
 
-<section class="relative min-h-screen flex flex-col justify-between overflow-hidden bg-gradient-to-br from-primary via-secondary to-primary">
-  <!-- Animated Background Elements -->
-  <div class="absolute inset-0 overflow-hidden opacity-10">
-    <div class="absolute top-20 left-10 w-72 h-72 bg-accent rounded-full blur-3xl animate-pulse"></div>
-    <div class="absolute bottom-20 right-10 w-96 h-96 bg-accent rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+<section class="relative min-h-screen flex flex-col justify-between overflow-hidden">
+  <!-- Hero Background Image -->
+  <div class="absolute inset-0">
+    <img
+      src="https://github.com/Mrfocused1/byway-training/blob/main/Generated%20Image%20October%2009,%202025%20-%204_53AM.png?raw=true"
+      alt="Hero background"
+      class="w-full h-full object-cover fade-in"
+    />
+    <!-- White gradient overlay at top -->
+    <div class="absolute inset-0 bg-gradient-to-b from-white/70 via-white/20 to-transparent" style="height: 30%;"></div>
+    <!-- White gradient overlay on left side -->
+    <div class="absolute inset-0 bg-gradient-to-r from-white/80 via-white/50 to-transparent" style="width: 50%;"></div>
+    <!-- White gradient overlay at bottom -->
+    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-white via-white/90 to-transparent" style="height: 30%;"></div>
   </div>
 
-  <div class="flex-1 flex items-center">
-    <div class="container-custom relative z-10 py-32 w-full">
-      <div class="max-w-4xl mx-auto text-center">
+  <div class="flex-1 flex items-center md:items-start">
+    <div class="container-custom relative z-10 py-32 md:pt-48 md:pb-32 w-full">
+      <div class="text-left" style="max-width: 600px;">
         <!-- Main Title -->
-        <h1 class="hero-title text-white mb-6 slide-down">
-          {title}
+        <h1 class="hero-title text-black mb-1 pt-2 slide-down flex flex-wrap justify-left items-center" style="max-width: 720px;">
+          <span>Transform</span>
+          <FlipWords client:load words={flipWords} className="text-black" />
         </h1>
 
         <!-- Subtitle -->
-        <p class="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed slide-down stagger-1">
+        <p class="text-lg md:text-xl text-black mb-8 leading-relaxed slide-down stagger-1">
           {subtitle}
         </p>
 
         <!-- CTA Buttons -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 slide-down stagger-2">
-          <a href={primaryCTALink} class="btn-primary px-8 py-4 text-base inline-flex items-center space-x-2">
+        <div class="flex flex-col sm:flex-row items-start justify-start gap-4 slide-down stagger-2">
+          <a href={primaryCTALink} class="px-8 py-4 bg-accent text-white font-medium uppercase text-base rounded-md transition-all duration-300 hover:bg-buttonHover hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 inline-flex items-center space-x-2">
             <span>{primaryCTA}</span>
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
             </svg>
           </a>
-          <a href={secondaryCTALink} class="btn-secondary px-8 py-4 text-base bg-transparent">
+          <a href={secondaryCTALink} class="px-8 py-4 bg-transparent border-2 border-black text-black font-medium uppercase text-base rounded-md transition-all duration-300 hover:bg-black hover:text-white hover:scale-105 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 inline-flex items-center">
             {secondaryCTA}
           </a>
         </div>
@@ -79,7 +93,7 @@ const companyLogos = [
     </div>
     <InfiniteSlider client:load duration={25} gap={48} className="w-full">
       {companyLogos.map((company) => (
-        <div class="flex items-center justify-center px-8 py-4 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300" style="min-width: 160px; height: 80px;">
+        <div class="flex items-center justify-center px-8 py-4" style="min-width: 160px; height: 80px;">
           <img
             src={company.logo}
             alt={`${company.name} logo`}

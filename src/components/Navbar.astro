@@ -1,38 +1,44 @@
 ---
 const currentPath = Astro.url.pathname;
 const isActive = (path: string) => currentPath === path;
+
+interface Props {
+  darkBackground?: boolean;
+}
+
+const { darkBackground = false } = Astro.props;
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-50 bg-primary shadow-lg transition-all duration-300">
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-transparent transition-all duration-300">
   <div class="container-custom py-4">
     <div class="flex items-center justify-between">
       <!-- Logo -->
       <a href="/" class="flex flex-col">
-        <span class="text-2xl font-bold text-white">My Way Training</span>
+        <span id="logo-text" class:list={["text-2xl font-bold transition-colors duration-300", darkBackground ? 'text-white' : 'text-black']}>My Way Training</span>
         <span class="text-xs uppercase tracking-wider text-accent">Corporate Excellence</span>
       </a>
 
       <!-- Desktop Navigation -->
       <div class="hidden md:flex items-center space-x-8">
-        <a href="/" class:list={["font-medium transition-colors", isActive('/') ? 'text-accent' : 'text-white hover:text-accent']}>
+        <a href="/" id="nav-home" class:list={["font-medium transition-colors", isActive('/') ? 'text-accent' : darkBackground ? 'text-white hover:text-accent' : 'text-black hover:text-accent']}>
           Home
         </a>
-        <a href="/services" class:list={["font-medium transition-colors", isActive('/services') ? 'text-accent' : 'text-white hover:text-accent']}>
+        <a href="/services" id="nav-services" class:list={["font-medium transition-colors", isActive('/services') ? 'text-accent' : darkBackground ? 'text-white hover:text-accent' : 'text-black hover:text-accent']}>
           Services
         </a>
-        <a href="/about" class:list={["font-medium transition-colors", isActive('/about') ? 'text-accent' : 'text-white hover:text-accent']}>
+        <a href="/about" id="nav-about" class:list={["font-medium transition-colors", isActive('/about') ? 'text-accent' : darkBackground ? 'text-white hover:text-accent' : 'text-black hover:text-accent']}>
           About
         </a>
-        <a href="/contact" class:list={["font-medium transition-colors", isActive('/contact') ? 'text-accent' : 'text-white hover:text-accent']}>
+        <a href="/contact" id="nav-contact" class:list={["font-medium transition-colors", isActive('/contact') ? 'text-accent' : darkBackground ? 'text-white hover:text-accent' : 'text-black hover:text-accent']}>
           Contact
         </a>
-        <a href="/contact" class="btn-primary">
+        <a href="/contact#form" class="btn-primary">
           Book Consultation
         </a>
       </div>
 
       <!-- Mobile Menu Button -->
-      <button id="mobile-menu-btn" class="md:hidden p-2 text-white" aria-label="Toggle menu">
+      <button id="mobile-menu-btn" class:list={["md:hidden p-2 transition-colors duration-300", darkBackground ? 'text-white' : 'text-black']} aria-label="Toggle menu">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
@@ -40,22 +46,22 @@ const isActive = (path: string) => currentPath === path;
     </div>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden mt-4 bg-white rounded-lg shadow-lg overflow-hidden">
+    <div id="mobile-menu" class:list={["hidden md:hidden mt-4 rounded-lg shadow-lg overflow-hidden transition-colors duration-300", darkBackground ? 'bg-transparent' : 'bg-transparent']}>
       <div class="py-2">
-        <a href="/" class:list={["block px-4 py-3 font-medium transition-colors", isActive('/') ? 'text-accent bg-gray-50' : 'text-gray-700 hover:text-accent hover:bg-gray-50']}>
+        <a href="/" class:list={["block px-4 py-3 font-medium transition-colors mobile-link", isActive('/') ? 'text-accent bg-gray-50' : darkBackground ? 'text-white hover:text-accent hover:bg-gray-50' : 'text-black hover:text-accent hover:bg-gray-50']}>
           Home
         </a>
-        <a href="/services" class:list={["block px-4 py-3 font-medium transition-colors", isActive('/services') ? 'text-accent bg-gray-50' : 'text-gray-700 hover:text-accent hover:bg-gray-50']}>
+        <a href="/services" class:list={["block px-4 py-3 font-medium transition-colors mobile-link", isActive('/services') ? 'text-accent bg-gray-50' : darkBackground ? 'text-white hover:text-accent hover:bg-gray-50' : 'text-black hover:text-accent hover:bg-gray-50']}>
           Services
         </a>
-        <a href="/about" class:list={["block px-4 py-3 font-medium transition-colors", isActive('/about') ? 'text-accent bg-gray-50' : 'text-gray-700 hover:text-accent hover:bg-gray-50']}>
+        <a href="/about" class:list={["block px-4 py-3 font-medium transition-colors mobile-link", isActive('/about') ? 'text-accent bg-gray-50' : darkBackground ? 'text-white hover:text-accent hover:bg-gray-50' : 'text-black hover:text-accent hover:bg-gray-50']}>
           About
         </a>
-        <a href="/contact" class:list={["block px-4 py-3 font-medium transition-colors", isActive('/contact') ? 'text-accent bg-gray-50' : 'text-gray-700 hover:text-accent hover:bg-gray-50']}>
+        <a href="/contact" class:list={["block px-4 py-3 font-medium transition-colors mobile-link", isActive('/contact') ? 'text-accent bg-gray-50' : darkBackground ? 'text-white hover:text-accent hover:bg-gray-50' : 'text-black hover:text-accent hover:bg-gray-50']}>
           Contact
         </a>
         <div class="px-4 pt-2 pb-4">
-          <a href="/contact" class="btn-primary block text-center w-full">
+          <a href="/contact#form" class="btn-primary block text-center w-full">
             Book Consultation
           </a>
         </div>
@@ -64,12 +70,86 @@ const isActive = (path: string) => currentPath === path;
   </div>
 </nav>
 
-<script>
-  // Simple mobile menu toggle
+<script define:vars={{ darkBackground }}>
+  // Mobile menu toggle
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
 
   btn?.addEventListener('click', () => {
     menu?.classList.toggle('hidden');
   });
+
+  // Scroll-triggered navbar color change
+  const navbar = document.getElementById('navbar');
+  const logoText = document.getElementById('logo-text');
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const navLinks = {
+    home: document.getElementById('nav-home'),
+    services: document.getElementById('nav-services'),
+    about: document.getElementById('nav-about'),
+    contact: document.getElementById('nav-contact')
+  };
+
+  function updateNavbarOnScroll() {
+    const scrolled = window.scrollY > 50;
+
+    if (scrolled) {
+      // Scrolled state: navy blue background with white text
+      navbar?.classList.remove('bg-transparent');
+      navbar?.classList.add('bg-primary');
+
+      logoText?.classList.remove('text-black');
+      logoText?.classList.add('text-white');
+
+      mobileMenuBtn?.classList.remove('text-black');
+      mobileMenuBtn?.classList.add('text-white');
+
+      // Update desktop nav links (only non-active ones)
+      Object.values(navLinks).forEach(link => {
+        if (link && !link.classList.contains('text-accent')) {
+          link.classList.remove('text-black');
+          link.classList.add('text-white');
+          link.classList.remove('hover:text-accent');
+          link.classList.add('hover:text-accent');
+        }
+      });
+
+      // Update mobile menu background
+      mobileMenu?.classList.remove('bg-transparent');
+      mobileMenu?.classList.add('bg-primary');
+    } else {
+      // Top of page: transparent background with text color based on background
+      navbar?.classList.remove('bg-primary');
+      navbar?.classList.add('bg-transparent');
+
+      // Use white text if dark background, black text otherwise
+      const textColor = darkBackground ? 'text-white' : 'text-black';
+      const oppositeColor = darkBackground ? 'text-black' : 'text-white';
+
+      logoText?.classList.remove(oppositeColor);
+      logoText?.classList.add(textColor);
+
+      mobileMenuBtn?.classList.remove(oppositeColor);
+      mobileMenuBtn?.classList.add(textColor);
+
+      // Update desktop nav links (only non-active ones)
+      Object.values(navLinks).forEach(link => {
+        if (link && !link.classList.contains('text-accent')) {
+          link.classList.remove(oppositeColor);
+          link.classList.add(textColor);
+        }
+      });
+
+      // Update mobile menu background
+      mobileMenu?.classList.remove('bg-primary');
+      mobileMenu?.classList.add('bg-transparent');
+    }
+  }
+
+  // Run on page load
+  updateNavbarOnScroll();
+
+  // Run on scroll
+  window.addEventListener('scroll', updateNavbarOnScroll);
 </script>

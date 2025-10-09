@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
-import ImageSlider from '../components/ImageSlider';
 import AnimatedCounter from '../components/AnimatedCounter';
 import FadeIn from '../components/FadeIn';
 
@@ -46,29 +45,32 @@ const teamImages = [
   title="About Us - My Way Training"
   description="Learn about My Way Training's mission to transform teams through expert corporate training. Meet our experienced team and discover our values."
 >
-  <Navbar />
+  <Navbar darkBackground={true} />
 
   <!-- Hero Section -->
-  <section class="relative pt-32 pb-20 bg-gradient-to-br from-primary via-secondary to-primary">
-    <div class="container-custom">
+  <section class="relative pt-32 pb-20 overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0 z-0">
+      <img
+        src={heroImages[0]}
+        alt="My Way Training Team"
+        class="w-full h-full object-cover"
+      />
+      <!-- Navy Blue Transparent Overlay -->
+      <div class="absolute inset-0 bg-primary/80"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="container-custom relative z-10">
       <FadeIn client:load direction="down">
         <div class="max-w-4xl mx-auto text-center">
           <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">
             Transforming Teams Since 2010
           </h1>
-          <p class="text-xl md:text-2xl text-gray-200 leading-relaxed">
+          <p class="text-xl text-gray-200 leading-relaxed">
             We're passionate about helping organizations unlock their people's potential and build cultures of excellence, collaboration, and continuous growth.
           </p>
         </div>
-      </FadeIn>
-    </div>
-  </section>
-
-  <!-- Hero Image Slider -->
-  <section class="py-0 bg-white -mt-10">
-    <div class="container-custom">
-      <FadeIn client:load direction="up" className="w-full">
-        <ImageSlider client:load images={heroImages} className="shadow-2xl" />
       </FadeIn>
     </div>
   </section>
@@ -125,27 +127,47 @@ const teamImages = [
     <div class="container-custom">
       <FadeIn client:load direction="up" className="text-center mb-16">
         <h2 class="section-heading text-primary mb-4">Our Core Values</h2>
-        <p class="section-subheading max-w-3xl mx-auto">
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
           These principles guide everything we do and every decision we make.
         </p>
       </FadeIn>
 
-      <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-        {values.map((value, index) => (
-          <FadeIn client:load direction="up" delay={index * 100}>
-            <div class="card group">
-              <div class="mb-6 overflow-hidden rounded-lg">
-                <img
-                  src={value.image}
-                  alt={value.title}
-                  class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500"
-                />
+      <div class="relative max-w-7xl mx-auto">
+        <!-- Horizontal connecting line (hidden on mobile) -->
+        <div class="hidden md:block absolute top-12 left-0 right-0 h-1 bg-accent/20" style="z-index: 0;"></div>
+
+        <!-- Values Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative" style="z-index: 1;">
+          {values.map((value, index) => (
+            <FadeIn client:load direction="up" delay={index * 100}>
+              <div class="text-center">
+                <!-- Number Circle -->
+                <div class="w-24 h-24 mx-auto mb-6 relative group animate-float" style={`animation-delay: ${index * 0.2}s;`}>
+                  <!-- Outer glow ring -->
+                  <div class="absolute inset-0 bg-accent/30 rounded-full blur-lg group-hover:blur-xl transition-all duration-300 animate-pulse-glow"></div>
+                  <!-- Rotating border ring -->
+                  <div class="absolute inset-0 rounded-full bg-gradient-to-br from-accent via-primary to-accent animate-spin-slow opacity-60"></div>
+                  <!-- Inner white ring -->
+                  <div class="absolute inset-1 bg-white rounded-full"></div>
+                  <!-- Main circle with gradient -->
+                  <div class="absolute inset-2 bg-gradient-to-br from-accent to-primary rounded-full flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-300">
+                    <span class="text-4xl font-bold text-white relative z-10">{index + 1}</span>
+                  </div>
+                </div>
+
+                <!-- Title -->
+                <h3 class="text-2xl font-bold text-primary mb-4 hover:text-accent transition-colors duration-300">
+                  {value.title}
+                </h3>
+
+                <!-- Description -->
+                <p class="text-gray-600 leading-relaxed">
+                  {value.description}
+                </p>
               </div>
-              <h3 class="text-2xl font-semibold text-primary mb-3 group-hover:text-accent transition-colors duration-300">{value.title}</h3>
-              <p class="text-gray-600 leading-relaxed">{value.description}</p>
-            </div>
-          </FadeIn>
-        ))}
+            </FadeIn>
+          ))}
+        </div>
       </div>
     </div>
   </section>
@@ -155,13 +177,9 @@ const teamImages = [
     <div class="container-custom">
       <FadeIn client:load direction="up" className="text-center mb-16">
         <h2 class="section-heading text-primary mb-4">Meet Our Expert Team</h2>
-        <p class="section-subheading max-w-3xl mx-auto">
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
           Experienced professionals dedicated to your team's success.
         </p>
-      </FadeIn>
-
-      <FadeIn client:load direction="up" className="max-w-5xl mx-auto mb-12">
-        <ImageSlider client:load images={teamImages} className="shadow-2xl rounded-lg" />
       </FadeIn>
 
       <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
@@ -237,62 +255,6 @@ const teamImages = [
     </div>
   </section>
 
-  <!-- Accreditations Section -->
-  <section class="py-20 bg-gray-50">
-    <div class="container-custom">
-      <FadeIn client:load direction="up" className="text-center mb-16">
-        <h2 class="section-heading text-primary mb-4">Accreditations & Memberships</h2>
-        <p class="section-subheading max-w-3xl mx-auto">
-          We maintain the highest professional standards through continuous certification and membership in leading industry bodies.
-        </p>
-      </FadeIn>
-
-      <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-        <FadeIn client:load direction="up" delay={100}>
-          <div class="text-center card">
-            <div class="mb-6 overflow-hidden rounded-lg">
-              <img
-                src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop"
-                alt="CIPD Certified"
-                class="w-full h-48 object-cover"
-              />
-            </div>
-            <h3 class="text-xl font-semibold text-primary mb-2">CIPD Certified</h3>
-            <p class="text-gray-600">Chartered Institute of Personnel and Development</p>
-          </div>
-        </FadeIn>
-
-        <FadeIn client:load direction="up" delay={200}>
-          <div class="text-center card">
-            <div class="mb-6 overflow-hidden rounded-lg">
-              <img
-                src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop"
-                alt="ICF Accredited"
-                class="w-full h-48 object-cover"
-              />
-            </div>
-            <h3 class="text-xl font-semibold text-primary mb-2">ICF Accredited</h3>
-            <p class="text-gray-600">International Coaching Federation</p>
-          </div>
-        </FadeIn>
-
-        <FadeIn client:load direction="up" delay={300}>
-          <div class="text-center card">
-            <div class="mb-6 overflow-hidden rounded-lg">
-              <img
-                src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=600&fit=crop"
-                alt="CPD Certified"
-                class="w-full h-48 object-cover"
-              />
-            </div>
-            <h3 class="text-xl font-semibold text-primary mb-2">CPD Certified</h3>
-            <p class="text-gray-600">Continuing Professional Development</p>
-          </div>
-        </FadeIn>
-      </div>
-    </div>
-  </section>
-
   <!-- CTA Section -->
   <section class="bg-gradient-to-r from-primary via-secondary to-primary py-20">
     <div class="container-custom">
@@ -302,7 +264,7 @@ const teamImages = [
           <p class="text-xl text-gray-200 mb-10 leading-relaxed">
             Let's discuss how we can help transform your team and drive your business forward.
           </p>
-          <a href="/contact" class="bg-accent text-white px-8 py-4 rounded-md font-medium uppercase text-sm hover:bg-buttonHover transition-colors duration-300 inline-flex items-center space-x-2">
+          <a href="/contact#form" class="bg-accent text-white px-8 py-4 rounded-md font-medium uppercase text-sm hover:bg-buttonHover transition-colors duration-300 inline-flex items-center space-x-2">
             <span>Get in Touch</span>
           </a>
         </div>

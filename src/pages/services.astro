@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
-import ImageSlider from '../components/ImageSlider';
 import FadeIn from '../components/FadeIn';
 
 // Service images
@@ -131,17 +130,29 @@ const services = [
   title="Our Services - My Way Training"
   description="Comprehensive corporate training solutions including leadership development, staff training, communication skills, and more. Tailored programs that deliver measurable results."
 >
-  <Navbar />
+  <Navbar darkBackground={true} />
 
   <!-- Hero Section -->
-  <section class="relative pt-32 pb-20 bg-gradient-to-br from-primary via-secondary to-primary">
-    <div class="container-custom">
+  <section class="relative pt-32 pb-20 overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0 z-0">
+      <img
+        src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&h=900&fit=crop"
+        alt="Team Training"
+        class="w-full h-full object-cover"
+      />
+      <!-- Navy Blue Transparent Overlay -->
+      <div class="absolute inset-0 bg-primary/80"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="container-custom relative z-10">
       <FadeIn client:load direction="down">
         <div class="max-w-4xl mx-auto text-center">
           <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">
             Transform Your Team with Expert Training
           </h1>
-          <p class="text-xl md:text-2xl text-gray-200 leading-relaxed">
+          <p class="text-xl text-gray-200 leading-relaxed">
             Discover our comprehensive range of training solutions designed to address your specific business challenges and drive measurable results.
           </p>
         </div>
@@ -152,17 +163,24 @@ const services = [
   <!-- Services Grid -->
   <section class="py-20 bg-white">
     <div class="container-custom">
+      <FadeIn client:load direction="up" className="text-center mb-16">
+        <h2 class="section-heading text-primary mb-4">Our Training Programs</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Explore our comprehensive range of professional development solutions, each tailored to address your specific business needs and drive measurable results.
+        </p>
+      </FadeIn>
+
       <div class="space-y-20">
         {services.map((service, index) => (
           <FadeIn client:load direction="up" delay={index * 100}>
             <div class="card group hover:shadow-2xl transition-shadow duration-300">
               <div class="grid md:grid-cols-2 gap-8 items-center">
-                {/* Image Slider Column */}
+                {/* Image Column */}
                 <div class={index % 2 === 0 ? 'md:order-1' : 'md:order-2'}>
-                  <ImageSlider
-                    client:load
-                    images={service.images}
-                    className="rounded-lg overflow-hidden"
+                  <img
+                    src={service.images[0]}
+                    alt={service.title}
+                    class="w-full h-auto object-cover rounded-lg overflow-hidden"
                   />
                 </div>
 
@@ -204,69 +222,41 @@ const services = [
     <div class="container-custom">
       <FadeIn client:load direction="up" className="text-center mb-16">
         <h2 class="section-heading text-primary mb-4">Our Training Process</h2>
-        <p class="section-subheading max-w-3xl mx-auto">
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
           A proven, systematic approach that ensures maximum impact and lasting results.
         </p>
       </FadeIn>
 
       <div class="grid md:grid-cols-4 gap-8">
         <FadeIn client:load direction="up" delay={100}>
-          <div class="text-center card">
-            <div class="mb-6 overflow-hidden rounded-lg">
-              <img
-                src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&h=600&fit=crop"
-                alt="Discovery Phase"
-                class="w-full h-48 object-cover"
-              />
-            </div>
+          <div class="text-center card h-full flex flex-col">
             <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">1</div>
             <h3 class="text-xl font-semibold text-primary mb-3">Discovery</h3>
-            <p class="text-gray-600">We analyze your needs, challenges, and objectives through comprehensive consultation.</p>
+            <p class="text-gray-600 flex-1">We analyze your needs, challenges, and objectives through comprehensive consultation.</p>
           </div>
         </FadeIn>
 
         <FadeIn client:load direction="up" delay={200}>
-          <div class="text-center card">
-            <div class="mb-6 overflow-hidden rounded-lg">
-              <img
-                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop"
-                alt="Design Phase"
-                class="w-full h-48 object-cover"
-              />
-            </div>
+          <div class="text-center card h-full flex flex-col">
             <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">2</div>
             <h3 class="text-xl font-semibold text-primary mb-3">Design</h3>
-            <p class="text-gray-600">Custom-tailored programs designed specifically for your team and industry context.</p>
+            <p class="text-gray-600 flex-1">Custom-tailored programs designed specifically for your team and industry context.</p>
           </div>
         </FadeIn>
 
         <FadeIn client:load direction="up" delay={300}>
-          <div class="text-center card">
-            <div class="mb-6 overflow-hidden rounded-lg">
-              <img
-                src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop"
-                alt="Delivery Phase"
-                class="w-full h-48 object-cover"
-              />
-            </div>
+          <div class="text-center card h-full flex flex-col">
             <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">3</div>
             <h3 class="text-xl font-semibold text-primary mb-3">Delivery</h3>
-            <p class="text-gray-600">Engaging, interactive sessions delivered by experienced trainers using proven methodologies.</p>
+            <p class="text-gray-600 flex-1">Engaging, interactive sessions delivered by experienced trainers using proven methodologies.</p>
           </div>
         </FadeIn>
 
         <FadeIn client:load direction="up" delay={400}>
-          <div class="text-center card">
-            <div class="mb-6 overflow-hidden rounded-lg">
-              <img
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop"
-                alt="Development Phase"
-                class="w-full h-48 object-cover"
-              />
-            </div>
+          <div class="text-center card h-full flex flex-col">
             <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">4</div>
             <h3 class="text-xl font-semibold text-primary mb-3">Development</h3>
-            <p class="text-gray-600">Ongoing support and follow-up to ensure sustained behavioral change and measurable results.</p>
+            <p class="text-gray-600 flex-1">Ongoing support and follow-up to ensure sustained behavioral change and measurable results.</p>
           </div>
         </FadeIn>
       </div>

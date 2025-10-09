@@ -3,7 +3,6 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import ContactForm from '../components/ContactForm';
-import ImageSlider from '../components/ImageSlider';
 import FadeIn from '../components/FadeIn';
 
 const heroImages = [
@@ -57,29 +56,32 @@ const faqs = [
   title="Contact Us - My Way Training"
   description="Get in touch with My Way Training to discuss your corporate training needs. Book a free consultation or request a quote for tailored training programs."
 >
-  <Navbar />
+  <Navbar darkBackground={true} />
 
   <!-- Hero Section -->
-  <section class="relative pt-32 pb-20 bg-gradient-to-br from-primary via-secondary to-primary">
-    <div class="container-custom">
+  <section class="relative pt-32 pb-20 overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0 z-0">
+      <img
+        src={heroImages[0]}
+        alt="Contact My Way Training"
+        class="w-full h-full object-cover"
+      />
+      <!-- Navy Blue Transparent Overlay -->
+      <div class="absolute inset-0 bg-primary/80"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="container-custom relative z-10">
       <FadeIn client:load direction="down">
         <div class="max-w-4xl mx-auto text-center">
           <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">
             Let's Transform Your Team Together
           </h1>
-          <p class="text-xl md:text-2xl text-gray-200 leading-relaxed">
+          <p class="text-xl text-gray-200 leading-relaxed">
             Ready to invest in your team's development? Get in touch for a free consultation and discover how our training programs can drive real results.
           </p>
         </div>
-      </FadeIn>
-    </div>
-  </section>
-
-  <!-- Hero Image Slider -->
-  <section class="py-0 bg-white -mt-10">
-    <div class="container-custom">
-      <FadeIn client:load direction="up" className="w-full">
-        <ImageSlider client:load images={heroImages} className="shadow-2xl" />
       </FadeIn>
     </div>
   </section>
@@ -89,7 +91,7 @@ const faqs = [
     <div class="container-custom">
       <FadeIn client:load direction="up" className="text-center mb-16">
         <h2 class="section-heading text-primary mb-4">Get In Touch</h2>
-        <p class="section-subheading max-w-3xl mx-auto">
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
           Choose the method that works best for you. We're here to help.
         </p>
       </FadeIn>
@@ -114,11 +116,11 @@ const faqs = [
       </div>
 
       <!-- Contact Form -->
-      <div class="mt-16">
+      <div id="form" class="mt-16">
         <FadeIn client:load direction="up">
           <div class="text-center mb-12">
             <h2 class="section-heading text-primary mb-4">Request a Free Consultation</h2>
-            <p class="section-subheading max-w-3xl mx-auto">
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
               Fill out the form below and we'll get back to you within 24 hours to discuss your training needs.
             </p>
           </div>
@@ -133,7 +135,7 @@ const faqs = [
     <div class="container-custom">
       <FadeIn client:load direction="up" className="text-center mb-16">
         <h2 class="section-heading text-primary mb-4">Frequently Asked Questions</h2>
-        <p class="section-subheading max-w-3xl mx-auto">
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
           Quick answers to common questions about our training programs.
         </p>
       </FadeIn>
@@ -165,44 +167,6 @@ const faqs = [
               +44 20 1234 5678
             </a>
           </p>
-        </div>
-      </FadeIn>
-    </div>
-  </section>
-
-  <!-- Office Location Section -->
-  <section class="py-20 bg-white">
-    <div class="container-custom">
-      <FadeIn client:load direction="up" className="text-center mb-12">
-        <h2 class="section-heading text-primary mb-4">Visit Our Office</h2>
-        <p class="section-subheading max-w-3xl mx-auto">
-          Located in the heart of London. Appointments available Monday to Friday.
-        </p>
-      </FadeIn>
-
-      <FadeIn client:load direction="up" delay={200}>
-        <div class="max-w-5xl mx-auto">
-          <img
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&h=800&fit=crop"
-            alt="London Office Building"
-            class="w-full rounded-lg shadow-2xl"
-          />
-          <div class="mt-8 text-center card">
-            <h3 class="text-2xl font-semibold text-primary mb-4">My Way Training Headquarters</h3>
-            <p class="text-lg text-gray-700 mb-2">123 Business Park</p>
-            <p class="text-lg text-gray-700 mb-4">London EC1A 1BB</p>
-            <p class="text-gray-600 mb-6">
-              Our modern training facilities are equipped with state-of-the-art technology and comfortable learning spaces designed to maximize engagement and knowledge retention.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="tel:+442012345678" class="btn-primary">
-                Call to Schedule Visit
-              </a>
-              <a href="/contact#form" class="btn-secondary">
-                Request Appointment
-              </a>
-            </div>
-          </div>
         </div>
       </FadeIn>
     </div>
