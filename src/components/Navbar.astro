@@ -11,9 +11,9 @@ const { darkBackground = false } = Astro.props;
 
 <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-transparent transition-all duration-300">
   <div class="container-custom py-4">
-    <div class="flex items-center justify-between">
-      <!-- Logo -->
-      <a href="/" class="flex flex-col">
+    <div class="flex items-center justify-between md:justify-between justify-end">
+      <!-- Logo (Desktop only) -->
+      <a href="/" class="hidden md:flex flex-col">
         <span id="logo-text" class:list={["text-2xl font-bold transition-colors duration-300", darkBackground ? 'text-white' : 'text-black']}>My Way Training</span>
         <span class="text-xs uppercase tracking-wider text-accent">Corporate Excellence</span>
       </a>
@@ -38,45 +38,103 @@ const { darkBackground = false } = Astro.props;
       </div>
 
       <!-- Mobile Menu Button -->
-      <button id="mobile-menu-btn" class:list={["md:hidden p-2 transition-colors duration-300", darkBackground ? 'text-white' : 'text-black']} aria-label="Toggle menu">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <button id="mobile-menu-btn" class:list={["md:hidden p-2 transition-colors duration-300 relative z-[60]", darkBackground ? 'text-white' : 'text-black']} aria-label="Toggle menu">
+        <!-- Hamburger Icon -->
+        <svg id="hamburger-icon" class="w-7 h-7 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
+        <!-- Close Icon -->
+        <svg id="close-icon" class="w-7 h-7 absolute top-2 left-2 hidden transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
       </button>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class:list={["hidden md:hidden mt-4 rounded-lg shadow-lg overflow-hidden transition-colors duration-300", darkBackground ? 'bg-transparent' : 'bg-transparent']}>
-      <div class="py-2">
-        <a href="/" class:list={["block px-4 py-3 font-medium transition-colors mobile-link", isActive('/') ? 'text-accent bg-gray-50' : darkBackground ? 'text-white hover:text-accent hover:bg-gray-50' : 'text-black hover:text-accent hover:bg-gray-50']}>
-          Home
-        </a>
-        <a href="/services" class:list={["block px-4 py-3 font-medium transition-colors mobile-link", isActive('/services') ? 'text-accent bg-gray-50' : darkBackground ? 'text-white hover:text-accent hover:bg-gray-50' : 'text-black hover:text-accent hover:bg-gray-50']}>
-          Services
-        </a>
-        <a href="/about" class:list={["block px-4 py-3 font-medium transition-colors mobile-link", isActive('/about') ? 'text-accent bg-gray-50' : darkBackground ? 'text-white hover:text-accent hover:bg-gray-50' : 'text-black hover:text-accent hover:bg-gray-50']}>
-          About
-        </a>
-        <a href="/contact" class:list={["block px-4 py-3 font-medium transition-colors mobile-link", isActive('/contact') ? 'text-accent bg-gray-50' : darkBackground ? 'text-white hover:text-accent hover:bg-gray-50' : 'text-black hover:text-accent hover:bg-gray-50']}>
-          Contact
-        </a>
-        <div class="px-4 pt-2 pb-4">
-          <a href="/contact#form" class="btn-primary block text-center w-full">
-            Book Consultation
-          </a>
-        </div>
-      </div>
     </div>
   </div>
 </nav>
 
+<!-- Mobile Menu Overlay -->
+<div id="mobile-menu-overlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+<!-- Mobile Slide-in Menu -->
+<div id="mobile-menu" class="fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-50 md:hidden transform translate-x-full transition-transform duration-300 ease-in-out">
+  <!-- Menu Header -->
+  <div class="flex items-center justify-between p-6 border-b border-gray-200">
+    <div>
+      <h2 class="text-xl font-bold text-primary">Menu</h2>
+      <p class="text-xs text-gray-500 uppercase tracking-wider">Navigation</p>
+    </div>
+  </div>
+
+  <!-- Menu Links -->
+  <div class="py-6 px-6 space-y-1">
+    <a href="/" class:list={["block px-4 py-4 font-medium text-lg rounded-lg transition-all duration-200", isActive('/') ? 'bg-accent text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-accent']}>
+      Home
+    </a>
+    <a href="/services" class:list={["block px-4 py-4 font-medium text-lg rounded-lg transition-all duration-200", isActive('/services') ? 'bg-accent text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-accent']}>
+      Services
+    </a>
+    <a href="/about" class:list={["block px-4 py-4 font-medium text-lg rounded-lg transition-all duration-200", isActive('/about') ? 'bg-accent text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-accent']}>
+      About
+    </a>
+    <a href="/contact" class:list={["block px-4 py-4 font-medium text-lg rounded-lg transition-all duration-200", isActive('/contact') ? 'bg-accent text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-accent']}>
+      Contact
+    </a>
+  </div>
+
+  <!-- CTA Button -->
+  <div class="absolute bottom-8 left-6 right-6">
+    <a href="/contact#form" class="btn-primary block text-center w-full py-4 text-base shadow-lg">
+      Book Consultation
+    </a>
+  </div>
+  </div>
+</nav>
+
 <script define:vars={{ darkBackground }}>
-  // Mobile menu toggle
+  // Mobile menu slide-in functionality
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
+  const overlay = document.getElementById('mobile-menu-overlay');
+  const hamburgerIcon = document.getElementById('hamburger-icon');
+  const closeIcon = document.getElementById('close-icon');
+  const menuLinks = menu?.querySelectorAll('a');
 
+  function openMenu() {
+    menu?.classList.remove('translate-x-full');
+    menu?.classList.add('translate-x-0');
+    overlay?.classList.remove('opacity-0', 'pointer-events-none');
+    overlay?.classList.add('opacity-100', 'pointer-events-auto');
+    hamburgerIcon?.classList.add('hidden');
+    closeIcon?.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    menu?.classList.remove('translate-x-0');
+    menu?.classList.add('translate-x-full');
+    overlay?.classList.remove('opacity-100', 'pointer-events-auto');
+    overlay?.classList.add('opacity-0', 'pointer-events-none');
+    hamburgerIcon?.classList.remove('hidden');
+    closeIcon?.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  // Toggle menu on button click
   btn?.addEventListener('click', () => {
-    menu?.classList.toggle('hidden');
+    const isOpen = menu?.classList.contains('translate-x-0');
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  // Close menu when overlay is clicked
+  overlay?.addEventListener('click', closeMenu);
+
+  // Close menu when any menu link is clicked
+  menuLinks?.forEach(link => {
+    link.addEventListener('click', closeMenu);
   });
 
   // Scroll-triggered navbar color change

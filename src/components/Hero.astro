@@ -38,23 +38,71 @@ const companyLogos = [
 ];
 ---
 
-<section class="relative min-h-screen flex flex-col justify-between overflow-hidden">
-  <!-- Hero Background Image -->
-  <div class="absolute inset-0">
+<section class="relative md:min-h-screen flex flex-col justify-between overflow-hidden">
+  <!-- Hero Background Image (Desktop only) -->
+  <div class="hidden md:block absolute inset-0">
     <img
       src="https://github.com/Mrfocused1/byway-training/blob/main/Generated%20Image%20October%2009,%202025%20-%204_53AM.png?raw=true"
       alt="Hero background"
       class="w-full h-full object-cover fade-in"
     />
-    <!-- White gradient overlay at top -->
+    <!-- Desktop overlays -->
     <div class="absolute inset-0 bg-gradient-to-b from-white/70 via-white/20 to-transparent" style="height: 30%;"></div>
-    <!-- White gradient overlay on left side -->
     <div class="absolute inset-0 bg-gradient-to-r from-white/80 via-white/50 to-transparent" style="width: 50%;"></div>
-    <!-- White gradient overlay at bottom -->
     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-white via-white/90 to-transparent" style="height: 30%;"></div>
   </div>
 
-  <div class="flex-1 flex items-center md:items-start">
+  <!-- Mobile Layout -->
+  <div class="md:hidden flex flex-col">
+    <!-- Hero Section with Background - Extended to include buttons -->
+    <div class="relative pt-24 pb-8">
+      <!-- Background Image - now covers entire hero including buttons -->
+      <div class="absolute inset-0 z-0">
+        <img
+          src="https://github.com/Mrfocused1/byway-training/blob/main/Generated%20Image%20October%2009,%202025%20-%204_53AM.png?raw=true"
+          alt="Hero background"
+          class="w-full h-full object-cover"
+        />
+        <!-- Enhanced Left gradient: 60% width, 80% opacity -->
+        <div class="absolute top-0 left-0 bottom-0 bg-gradient-to-r from-black/80 to-transparent" style="width: 60%;"></div>
+        <!-- Enhanced Bottom gradient: 85% height, pure black at bottom -->
+        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/90 to-transparent" style="height: 85%;"></div>
+      </div>
+
+      <!-- Content: Title, Description AND Buttons - unified container -->
+      <div class="relative z-10 flex flex-col items-start justify-center text-left px-6 w-full">
+        <!-- Title -->
+        <h1 class="text-4xl font-bold tracking-tight text-white leading-tight mb-6">
+          Transform<br />
+          <FlipWords client:load words={flipWords} className="text-white text-4xl" />
+        </h1>
+
+        <!-- Description -->
+        <p class="max-w-2xl text-lg leading-8 text-white/90 mb-8">
+          {subtitle}
+        </p>
+
+        <!-- CTA Buttons - now integrated into hero -->
+        <div class="flex flex-row items-center gap-3 w-full">
+          <a
+            href={primaryCTALink}
+            class="flex-1 px-6 py-4 min-h-[48px] bg-accent text-white font-semibold uppercase text-sm tracking-wide rounded-md transition-all duration-300 hover:bg-buttonHover hover:shadow-xl inline-flex items-center justify-center shadow-lg"
+          >
+            {primaryCTA}
+          </a>
+          <a
+            href={secondaryCTALink}
+            class="flex-1 px-6 py-4 min-h-[48px] bg-white/95 backdrop-blur-sm border-2 border-white text-primary font-semibold uppercase text-sm tracking-wide rounded-md transition-all duration-300 hover:bg-white hover:shadow-xl inline-flex items-center justify-center shadow-lg"
+          >
+            {secondaryCTA}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Desktop Layout (unchanged) -->
+  <div class="hidden md:flex flex-1 items-start">
     <div class="container-custom relative z-10 py-32 md:pt-48 md:pb-32 w-full">
       <div class="text-left" style="max-width: 600px;">
         <!-- Main Title -->
@@ -84,8 +132,8 @@ const companyLogos = [
     </div>
   </div>
 
-  <!-- Trusted By Section with Logo Slider -->
-  <div class="relative z-10 pb-20">
+  <!-- Trusted By Section with Logo Slider (Desktop only) -->
+  <div class="hidden md:block relative z-10 pb-20">
     <div class="text-center mb-8">
       <h3 class="text-white/80 text-sm md:text-base font-semibold uppercase tracking-wider">
         Trusted By
@@ -105,8 +153,8 @@ const companyLogos = [
     </InfiniteSlider>
   </div>
 
-  <!-- Scroll Indicator -->
-  <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
+  <!-- Scroll Indicator (Desktop only) -->
+  <div class="hidden md:block absolute bottom-2 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
     <div class="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
       <div class="w-1.5 h-3 bg-white rounded-full mt-2"></div>
     </div>
