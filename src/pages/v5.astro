@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { FlipWords } from '../components/FlipWords';
+
+const flipWords = ["Your Team", "Your Business", "Your Future", "Your Success"];
+const subtitle = "Partner with the UK's leading corporate training provider for tailored programs that deliver measurable results and lasting impact.";
+---
+
+<Layout title="V5 - Taller Section">
+  <div class="md:hidden flex flex-col">
+    <!-- V5: Taller section height -->
+    <div class="relative min-h-[600px] pt-20 pb-8">
+      <div class="absolute inset-0 z-0">
+        <img
+          src="https://github.com/Mrfocused1/byway-training/blob/main/curcam.jpg?raw=true"
+          alt="Hero background"
+          class="w-full h-full object-cover object-center"
+        />
+        <div class="absolute top-0 left-0 bottom-0 bg-gradient-to-r from-white/90 via-white/70 to-transparent" style="width: 70%;"></div>
+        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-white via-white/95 to-transparent" style="height: 40%;"></div>
+      </div>
+
+      <div class="relative z-10 h-full flex flex-col items-start justify-end text-left px-6 pb-8 w-full">
+        <h1 class="text-4xl font-bold tracking-tight text-black leading-tight mb-6">
+          Transform<br />
+          <FlipWords client:load words={flipWords} className="text-black text-4xl" />
+        </h1>
+        <p class="max-w-2xl text-lg leading-8 text-gray-900">
+          {subtitle}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="p-8 text-center">
+    <h2 class="text-2xl font-bold">V5: min-h-[600px] + pb-8</h2>
+  </div>
+</Layout>
