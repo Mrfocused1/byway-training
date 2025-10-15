@@ -1,5 +1,4 @@
 ---
-import InfiniteSlider from './InfiniteSlider';
 import { FlipWords } from './FlipWords';
 
 interface Props {
@@ -22,20 +21,6 @@ const {
 
 // Words to flip through
 const flipWords = ["Your Team", "Your Business", "Your Future", "Your Success"];
-
-// Company logos - using placeholder company images
-const companyLogos = [
-  { name: "Microsoft", logo: "https://logo.clearbit.com/microsoft.com" },
-  { name: "Google", logo: "https://logo.clearbit.com/google.com" },
-  { name: "Amazon", logo: "https://logo.clearbit.com/amazon.com" },
-  { name: "Apple", logo: "https://logo.clearbit.com/apple.com" },
-  { name: "IBM", logo: "https://logo.clearbit.com/ibm.com" },
-  { name: "Oracle", logo: "https://logo.clearbit.com/oracle.com" },
-  { name: "SAP", logo: "https://logo.clearbit.com/sap.com" },
-  { name: "Adobe", logo: "https://logo.clearbit.com/adobe.com" },
-  { name: "Salesforce", logo: "https://logo.clearbit.com/salesforce.com" },
-  { name: "Intel", logo: "https://logo.clearbit.com/intel.com" },
-];
 ---
 
 <section class="relative md:min-h-screen flex flex-col justify-between overflow-hidden">
@@ -54,23 +39,23 @@ const companyLogos = [
 
   <!-- Mobile Layout -->
   <div class="md:hidden flex flex-col">
-    <!-- Hero Section with Background - Extended to include buttons -->
-    <div class="relative pt-6 pb-0">
-      <!-- Background Image - now covers entire hero including buttons -->
+    <!-- Hero Section with Background -->
+    <div class="relative" style="height: calc(100vh - 220px);">
+      <!-- Background Image -->
       <div class="absolute inset-0 z-0">
         <img
           src="https://github.com/Mrfocused1/byway-training/blob/main/curcam.jpg?raw=true"
           alt="Hero background"
-          class="w-full h-full object-cover"
+          class="w-full h-full object-cover object-center"
         />
-        <!-- Enhanced Left gradient: 60% width, 80% opacity -->
+        <!-- Left gradient: 60% width, 80% opacity -->
         <div class="absolute top-0 left-0 bottom-0 bg-gradient-to-r from-black/80 to-transparent" style="width: 60%;"></div>
-        <!-- Bottom gradient: reduced to 40% height -->
-        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/90 to-transparent" style="height: 40%;"></div>
+        <!-- Bottom gradient: 8% height - white gradient -->
+        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-white via-white/90 to-transparent" style="height: 8%;"></div>
       </div>
 
       <!-- Content: Title and Description -->
-      <div class="relative z-10 flex flex-col items-start justify-center text-left px-6 w-full mt-20">
+      <div class="relative z-10 h-full flex flex-col items-start justify-center text-left px-6 w-full">
         <!-- Title -->
         <h1 class="text-4xl font-bold tracking-tight text-white leading-tight mb-6">
           Transform<br />
@@ -114,27 +99,6 @@ const companyLogos = [
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- Trusted By Section with Logo Slider (Desktop only) -->
-  <div class="hidden md:block relative z-10 pb-20">
-    <div class="text-center mb-8">
-      <h3 class="text-white/80 text-sm md:text-base font-semibold uppercase tracking-wider">
-        Trusted By
-      </h3>
-    </div>
-    <InfiniteSlider client:load duration={25} gap={48} className="w-full">
-      {companyLogos.map((company) => (
-        <div class="flex items-center justify-center px-8 py-4" style="min-width: 160px; height: 80px;">
-          <img
-            src={company.logo}
-            alt={`${company.name} logo`}
-            class="max-h-12 max-w-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
-            loading="lazy"
-          />
-        </div>
-      ))}
-    </InfiniteSlider>
   </div>
 
   <!-- Scroll Indicator (Desktop only) -->

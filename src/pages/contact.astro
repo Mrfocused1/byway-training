@@ -15,7 +15,7 @@ const contactMethods = [
   {
     image: "https://images.unsplash.com/photo-1534536281715-e28d76689b4d?w=800&h=600&fit=crop",
     title: "Phone",
-    detail: "+44 20 1234 5678",
+    detail: "+44 7196 103 2314",
     subtitle: "Mon-Fri from 9am to 6pm"
   },
   {
@@ -23,12 +23,6 @@ const contactMethods = [
     title: "Email",
     detail: "hello@mywaytraining.co.uk",
     subtitle: "We'll respond within 24 hours"
-  },
-  {
-    image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=800&h=600&fit=crop",
-    title: "Office",
-    detail: "123 Business Park, London EC1A 1BB",
-    subtitle: "By appointment only"
   }
 ];
 
@@ -59,7 +53,7 @@ const faqs = [
   <Navbar darkBackground={true} />
 
   <!-- Hero Section -->
-  <section class="relative pt-6 md:pt-32 pb-4 md:pb-20 overflow-hidden">
+  <section class="relative pt-24 md:pt-32 pb-4 md:pb-20 overflow-hidden">
     <!-- Background Image -->
     <div class="absolute inset-0 z-0">
       <img
@@ -97,7 +91,7 @@ const faqs = [
         </p>
       </FadeIn>
 
-      <div class="grid md:grid-cols-3 gap-8 mb-16">
+      <div class="grid md:grid-cols-2 gap-8 mb-16 max-w-4xl mx-auto">
         {contactMethods.map((method, index) => (
           <FadeIn client:load direction="up" delay={index * 100}>
             <div class="card text-center group">
@@ -166,8 +160,8 @@ const faqs = [
               Send us an email
             </a>
             {' '}or give us a call at{' '}
-            <a href="tel:+442012345678" class="text-accent font-medium hover:underline">
-              +44 20 1234 5678
+            <a href="tel:+4471961032314" class="text-accent font-medium hover:underline">
+              +44 7196 103 2314
             </a>
           </p>
         </div>
@@ -185,7 +179,7 @@ const faqs = [
             Book your free 30-minute consultation today and discover how we can help transform your team.
           </p>
           <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="tel:+442012345678" class="bg-accent text-white px-8 py-4 rounded-md font-medium uppercase text-sm hover:bg-buttonHover transition-colors duration-300">
+            <a href="tel:+4471961032314" class="bg-accent text-white px-8 py-4 rounded-md font-medium uppercase text-sm hover:bg-buttonHover transition-colors duration-300">
               Call Us Now
             </a>
             <a href="mailto:hello@mywaytraining.co.uk" class="border-2 border-white text-white px-8 py-4 rounded-md font-medium uppercase text-sm hover:bg-white hover:text-primary transition-all duration-300">
