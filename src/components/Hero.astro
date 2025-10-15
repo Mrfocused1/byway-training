@@ -48,8 +48,8 @@ const flipWords = ["Your Team", "Your Business", "Your Future", "Your Success"];
           alt="Hero background"
           class="w-full h-full object-cover object-center"
         />
-        <!-- Left gradient: 60% width, 80% opacity -->
-        <div class="absolute top-0 left-0 bottom-0 bg-gradient-to-r from-black/80 to-transparent" style="width: 60%;"></div>
+        <!-- Left gradient: 60% width, 80% opacity - white -->
+        <div class="absolute top-0 left-0 bottom-0 bg-gradient-to-r from-white/80 to-transparent" style="width: 60%;"></div>
         <!-- Bottom gradient: 15% height - white gradient -->
         <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-white via-white/90 to-transparent" style="height: 15%;"></div>
       </div>
@@ -57,13 +57,13 @@ const flipWords = ["Your Team", "Your Business", "Your Future", "Your Success"];
       <!-- Content: Title and Description -->
       <div class="relative z-10 h-full flex flex-col items-start justify-center text-left px-6 w-full">
         <!-- Title -->
-        <h1 class="text-4xl font-bold tracking-tight text-white leading-tight mb-6">
+        <h1 class="text-4xl font-bold tracking-tight text-black leading-tight mb-6">
           Transform<br />
-          <FlipWords client:load words={flipWords} className="text-white text-4xl" />
+          <FlipWords client:load words={flipWords} className="text-black text-4xl" />
         </h1>
 
         <!-- Description -->
-        <p class="max-w-2xl text-lg leading-8 text-white/90">
+        <p class="max-w-2xl text-lg leading-8 text-gray-900">
           {subtitle}
         </p>
       </div>
